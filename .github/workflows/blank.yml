@@ -34,3 +34,6 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Echo secret TEST_VARIABLE
+        run: echo ${{ secrets.TEST_VARIABLE }}    
