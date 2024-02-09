@@ -22,6 +22,7 @@ jobs:
     environment: dev
     env:
       MY_SECRET: ${{ secrets.TEST_VARIABLE }}
+      MY_VAR: ${{ vars.MY_CUSTOM_VARIABLE }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,4 +36,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Check if secret is empty
         run: echo $MY_SECRET
+
+      - name: Check if var is empty
+        run: echo $MY_VAR
 
