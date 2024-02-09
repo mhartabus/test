@@ -31,8 +31,10 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Check if secret is empty
+        env:
+          MY_SECRET: ${{ secrets.TEST_VARIABLE }}
         run: |
-          if [[ -z "${{ secrets.TEST_VARIABLE }}" ]]; then
+          if [[ -z "${MY_SECRET}" ]]; then
             echo "Secret is not set or is empty"
           else
             echo "Secret is set and is not empty"
