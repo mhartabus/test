@@ -13,6 +13,7 @@ export default function App() {
   console.log(watch("example"));
 
   return (
+    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
       <input defaultValue="test" {...register("example")} />
