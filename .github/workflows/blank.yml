@@ -23,11 +23,22 @@ jobs:
     env:
       MY_SECRET: ${{ secrets.TEST_VARIABLE }}
       MY_VAR: ${{ vars.MY_CUSTOM_VARIABLE }}
-
+    concurrency:
+        group: ${{ github.workflow }}-${{ github.ref }}
+        cancel-in-progress: true
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: Wait for 40 seconds
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            await wait(40000);
+      - name: Continue with other steps
+        run: echo "Done waiting!"
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -39,4 +50,5 @@ jobs:
 
       - name: Check if var is empty
         run: echo $MY_VAR
+        
 
